@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Fikih Shalat Berjamaah</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-arabic {
+      font-family: 'Amiri', serif;
+    }
+    /* Islamic subtle geometric background */
+    .islamic-pattern {
+      background-color: #064e3b;
+      background-image: radial-gradient(#10b981 0.75px, transparent 0.75px), radial-gradient(#059669 0.75px, #064e3b 0.75px);
+      background-size: 30px 30px;
+      background-position: 0 0, 15px 15px;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+    }
+    @media print {
+      body {
+        background: #ffffff !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-shadow-none {
+        box-shadow: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-emerald-50/50 min-h-screen text-slate-800 antialiased selection:bg-emerald-600 selection:text-white">
+
+  <!-- Header Banner Nuansa Islami Modern -->
+  <header class="islamic-pattern text-white pt-10 pb-16 px-4 relative overflow-hidden shadow-lg border-b-4 border-amber-400">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30 pointer-events-none"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10 space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-800/80 border border-emerald-400/40 text-emerald-200 text-xs font-semibold tracking-wide">
+        <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+        <span>Pendidikan Agama Islam & Budi Pekerti</span>
+      </div>
+      <p class="font-arabic text-2xl md:text-3xl text-amber-300 font-bold tracking-wider pt-1">
+        بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+      </p>
+      <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-white">
+        Kuis Interaktif Shalat Berjamaah
+      </h1>
+      <p class="text-emerald-100 text-sm md:text-base max-w-lg mx-auto font-medium">
+        Uji pemahaman tentang syarat imam, syarat makmum, makmum muwafiq, dan makmum masbuk.
+      </p>
+    </div>
+  </header>
+
+  <!-- Container Utama -->
+  <main class="max-w-3xl mx-auto px-4 -mt-8 pb-16 relative z-20">
+
+    <!-- Card Form / Kuis -->
+    <div id="quiz-wrapper" class="glass-card rounded-2xl shadow-xl border border-emerald-100 p-6 md:p-8 transition-all">
+
+      <!-- Form Data Siswa (Atas) -->
+      <section class="mb-8 pb-6 border-b border-emerald-100">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shadow">
+            1
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-slate-900">Identitas Siswa</h2>
+            <p class="text-xs text-slate-500">Pilih nama kamu dari daftar kelas sebelum menjawab soal</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+          <div>
+            <label for="student-select" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              Pilih Nama Siswa <span class="text-rose-500">*</span>
+            </label>
+            <div class="relative">
+              <select id="student-select" class="w-full pl-3 pr-10 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow">
+                <option value="" disabled selected>-- Pilih Nama dari Daftar --</option>
+              </select>
+              <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-slate-400">
+                <i data-lucide="chevron-down" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label for="custom-name" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
+              Atau Ketik Nama Manual (Opsional)
+            </label>
+            <div class="relative">
+              <input type="text" id="custom-name" placeholder="Tuliskan nama jika tidak ada di daftar..." class="w-full pl-9 pr-3 py-2.5 bg-white border border-slate-300 rounded-xl text-sm font-medium text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-shadow">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
+                <i data-lucide="user-pen" class="w-4 h-4"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Indikator Progres Pengerjaan -->
+        <div class="mt-5 flex items-center justify-between text-xs text-slate-600 bg-emerald-50/70 p-3 rounded-xl border border-emerald-200/60">
+          <span class="flex items-center gap-1.5 font-semibold text-emerald-900">
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+            Progres Menjawab:
+          </span>
+          <span id="progress-text" class="font-bold text-emerald-700">0 dari 5 Soal Terjawab</span>
+        </div>
+      </section>
+
+      <!-- Daftar Soal Benar / Salah (Acak 5 dari 20 Bank Soal) -->
+      <section class="space-y-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-sm shadow">
+              2
+            </div>
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Soal Kuis Benar - Salah</h2>
+              <p class="text-xs text-slate-500">5 butir soal diacak otomatis dari 20 bank soal fikih</p>
+            </div>
+          </div>
+          <span class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full border border-amber-300 flex items-center gap-1">
+            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i> Acak 5 dari 20 Soal
+          </span>
+        </div>
+
+        <!-- Wadah Dinamis 5 Soal Acak -->
+        <div id="questions-container" class="space-y-5">
+          <!-- Soal di-generate secara acak oleh JavaScript -->
+        </div>
+      </section>
+
+      <!-- Alert Peringatan Validasi -->
+      <div id="error-box" class="hidden mt-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-sm flex items-center gap-2">
+        <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0 text-rose-600"></i>
+        <span id="error-message">Mohon lengkapi nama siswa dan jawab seluruh soal.</span>
+      </div>
+
+      <!-- Tombol Submit -->
+      <div class="mt-8 pt-4">
+        <button type="button" onclick="submitQuiz()" class="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-base shadow-lg shadow-emerald-700/20 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
+          <i data-lucide="send" class="w-5 h-5"></i>
+          <span>Kirim & Periksa Jawaban</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Tampilan Hasil (Muncul Setelah Submit) -->
+    <div id="result-wrapper" class="hidden glass-card rounded-2xl shadow-xl border border-emerald-100 p-6 md:p-8 mt-6">
+      <div class="text-center pb-6 border-b border-emerald-100">
+        <div id="badge-icon" class="w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-3 shadow-md">
+          <!-- Icon injected by JS -->
+        </div>
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 uppercase tracking-wider mb-2">
+          Hasil Penilaian Kuis
+        </span>
+        <h3 id="result-student-name" class="text-xl md:text-2xl font-extrabold text-slate-800">Nama Siswa</h3>
+        <p class="text-xs text-slate-500 mt-1" id="result-timestamp">Waktu pengerjaan</p>
+
+        <!-- Nilai Akhir -->
+        <div class="mt-5 inline-flex items-baseline gap-2 bg-gradient-to-br from-emerald-500 to-teal-700 text-white px-8 py-4 rounded-2xl shadow-lg">
+          <span class="text-xs uppercase font-medium tracking-wider">Nilai:</span>
+          <span id="final-score" class="text-4xl md:text-5xl font-black">100</span>
+          <span class="text-emerald-200 text-sm font-semibold">/ 100</span>
+        </div>
+        <p id="score-predicate" class="text-sm font-bold text-emerald-800 mt-3"></p>
+      </div>
+
+      <!-- Pembahasan Soal -->
+      <div class="mt-6">
+        <h4 class="text-base font-bold text-slate-800 mb-4 flex items-center gap-2">
+          <i data-lucide="file-text" class="w-4 h-4 text-emerald-600"></i>
+          Pembahasan Rinci Setiap Soal:
+        </h4>
+        <div id="explanation-container" class="space-y-4">
+          <!-- Item penjelasan diisi via JavaScript -->
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-8 pt-6 border-t border-emerald-100 flex flex-col sm:flex-row gap-3 no-print">
+        <button type="button" onclick="window.print()" class="flex-1 py-3 px-4 rounded-xl border border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold text-sm transition-all flex items-center justify-center gap-2">
+          <i data-lucide="printer" class="w-4 h-4"></i> Cetak / Simpan PDF
+        </button>
+        <button type="button" onclick="resetQuiz()" class="flex-1 py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-semibold text-sm transition-all shadow flex items-center justify-center gap-2">
+          <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Kerjakan Ulang
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-center text-xs text-emerald-800/80 pb-8 no-print">
+    <p>Media Pembelajaran Fikih Shalat Berjamaah &copy; 2026</p>
+  </footer>
+
+  <script>
+    // 29 Nama Siswa dari Lampiran Gambar
+    const studentNames = [
+      "AFIFA NAHDA RAFANDA",
+      "AMELIA NAJWA",
+      "ANGGIKA PUTRI KRISNAWATI",
+      "ANITA FIBRIYANTI",
+      "ATIKA ZAHRA NAUFALYN",
+      "AURORA QURROTA AYUN",
+      "AZZAHRUL JANNAH",
+      "ERIC FERDINAN MAULANA",
+      "IQBAL AZAMUDIN",
+      "IQRILYA ZAHWA ALMIRA",
+      "KAYLA PUTRI FIORENTINA",
+      "MADA FAWWAS AFIQ MUNTHAHA",
+      "MARSHA NIDA FAJRIA",
+      "MAULANA ATHAYA ILYAS",
+      "MOHAMMAD RIZAL RADITYA",
+      "MUHAMMAD ABID ASSYAFA",
+      "MUHAMMAD AINUN NAZIB",
+      "MUHAMMAD BILAL DIRGANTARA",
+      "MUHAMMAD FAIZ SAFARAZ",
+      "MUHAMMAD RADITIYA ARKAN",
+      "MUHAMMAD YUSUF",
+      "NAJWA KHAIRA WILDA",
+      "QUEINARA DWI PUJIASTUTI",
+      "RASTI AULYA SHOFI",
+      "REVAND IRSYAD JAYA PRATAMA",
+      "SYAFA ARIANI ZAHRA",
+      "TRISTAN RADITYA FIRANSYAH PUTRA",
+      "VINA KARISMA",
+      "WILDAN FARIZQI PRATAMA"
+    ];
+
+    // Bank 20 Soal Fikih Shalat Berjamaah
+    const questionBank = [
+      {
+        id: 1,
+        topic: "Syarat Imam",
+        statement: "Seorang makmum laki-laki dewasa sah hukumnya mengikuti shalat berjamaah yang diimami oleh seorang perempuan.",
+        correctAnswer: false,
+        explanation: "SALAH. Di antara syarat imam adalah makmum laki-laki (baik dewasa maupun anak mumayyiz) tidak sah diimami oleh perempuan."
+      },
+      {
+        id: 2,
+        topic: "Syarat Makmum",
+        statement: "Di antara syarat sah makmum adalah berniat mengikuti imam serta posisi tumit makmum tidak boleh berada lebih depan daripada tumit imam.",
+        correctAnswer: true,
+        explanation: "BENAR. Makmum wajib berniat qudwah (mengikuti imam) dan posisi berdirinya (tumit) tidak boleh mendahului posisi tumit imam."
+      },
+      {
+        id: 3,
+        topic: "Makmum Muwafiq",
+        statement: "Makmum muwafiq adalah makmum yang mendapati waktu cukup bersama imam dalam keadaan berdiri untuk membaca Surat Al-Fatihah dengan tempo sedang.",
+        correctAnswer: true,
+        explanation: "BENAR. Makmum muwafiq memiliki waktu luang yang cukup pada posisi berdiri bersama imam dengan kecepatan bacaan standar untuk menuntaskan Al-Fatihah."
+      },
+      {
+        id: 4,
+        topic: "Makmum Masbuk",
+        statement: "Makmum masbuk yang mendapati imam sedang rukuk dan sempat rukuk serta thuma'ninah bersama imam sebelum imam i'tidal, tetap harus menambah rakaat tersebut setelah imam salam.",
+        correctAnswer: false,
+        explanation: "SALAH. Makmum masbuk yang mendapati rukuk dan thuma'ninah bersama imam sebelum imam i'tidal dihitung telah mendapatkan rakaat tersebut, sehingga tidak perlu ditambah."
+      },
+      {
+        id: 5,
+        topic: "Syarat Makmum",
+        statement: "Makmum yang sengaja mendahului gerakan imam sebanyak dua rukun fi'li (rukun perbuatan) berturut-turut tanpa uzur dapat membatalkan shalatnya.",
+        correctAnswer: true,
+        explanation: "BENAR. Sengaja mendahului imam sebanyak dua rukun fi'li berturut-turut tanpa uzur yang dibenarkan syariat dapat membatalkan shalat makmum."
+      },
+      {
+        id: 6,
+        topic: "Syarat Imam",
+        statement: "Seorang imam shalat fardhu disyaratkan harus suci dari hadas kecil maupun hadas besar serta suci pakaian, badan, dan tempat dari najis.",
+        correctAnswer: true,
+        explanation: "BENAR. Kesucian dari hadats dan najis adalah syarat sah shalat sekaligus syarat mutlak bagi seorang imam."
+      },
+      {
+        id: 7,
+        topic: "Syarat Imam",
+        statement: "Orang yang ummi (tidak fasih atau bacaan Al-Fatihahnya salah sehingga merusak makna) sah mengimami makmum yang qari' (bacaannya fasih dan benar).",
+        correctAnswer: false,
+        explanation: "SALAH. Orang yang belum fasih/rusak bacaan fatihahnya (ummi) tidak sah menjadi imam bagi makmum yang fasih (qari')."
+      },
+      {
+        id: 8,
+        topic: "Syarat Makmum",
+        statement: "Jika makmum shalat di dalam masjid bersama imam, makmum disyaratkan mengetahui perpindahan gerakan imam, baik dengan melihat langsung, melihat shaf depan, atau mendengar suara imam/muballigh.",
+        correctAnswer: true,
+        explanation: "BENAR. Mengetahui perpindahan gerakan imam secara yakin adalah salah satu syarat keabsahan ikhtilat/mengikuti imam."
+      },
+      {
+        id: 9,
+        topic: "Syarat Makmum",
+        statement: "Jika hanya ada satu orang makmum laki-laki bersama satu orang imam laki-laki, posisi makmum yang disunnahkan adalah berdiri tepat di sebelah kiri sejajar imam.",
+        correctAnswer: false,
+        explanation: "SALAH. Posisi sunnah bila makmum laki-laki hanya satu orang adalah di sebelah KANAN imam dan posisinya sedikit mundur dari imam."
+      },
+      {
+        id: 10,
+        topic: "Makmum Muwafiq",
+        statement: "Makmum muwafiq yang tertinggal dari imam karena bacaan Al-Fatihahnya lambat dan tartil, diberi toleransi tertinggal hingga tiga rukun panjang untuk menuntaskan bacaannya.",
+        correctAnswer: true,
+        explanation: "BENAR. Dalam mazhab Syafi'i, makmum muwafiq yang bacaannya lambat secara alami diberi toleransi terlambat hingga 3 rukun panjang demi menyelesaikan Al-Fatihah."
+      },
+      {
+        id: 11,
+        topic: "Makmum Masbuk",
+        statement: "Makmum masbuk yang baru takbiratul ihram ketika imam sedang tasyahud akhir tidak perlu takbiratul ihram sambil berdiri, melainkan bisa langsung langsung duduk bersama imam.",
+        correctAnswer: false,
+        explanation: "SALAH. Takbiratul ihram adalah rukun yang wajib dilakukan dalam keadaan berdiri sempurna sebelum turun duduk menyertai imam."
+      },
+      {
+        id: 12,
+        topic: "Makmum Masbuk",
+        statement: "Makmum masbuk baru boleh bangkit menambah rakaat yang tertinggal setelah imam menyelesaikan kedua salamnya.",
+        correctAnswer: true,
+        explanation: "BENAR. Makmum masbuk disunnahkan menunggu imam selesai mengucapkan salam kedua sebelum bangkit menyempurnakan rakaat yang kurang."
+      },
+      {
+        id: 13,
+        topic: "Syarat Imam",
+        statement: "Laki-laki yang sudah baligh sah dan boleh bermakmum di belakang anak laki-laki yang masih mumayyiz (belum baligh) namun sudah bagus shalat dan bacaannya.",
+        correctAnswer: true,
+        explanation: "BENAR. Dalam mazhab Syafi'i, shalat orang baligh di belakang anak mumayyiz hukumnya sah, meskipun lebih utama diimami oleh orang yang sudah baligh."
+      },
+      {
+        id: 14,
+        topic: "Syarat Makmum",
+        statement: "Makmum yang mengetahui bahwa wudhu imamnya telah batal (misal keluar hadas) tetap boleh dan sah melanjutkan shalat mengikutinya tanpa perlu berniat mufaraqah (memisahkan diri).",
+        correctAnswer: false,
+        explanation: "SALAH. Jika makmum mengetahui imam berhadas atau shalatnya batal, makmum wajib berniat mufaraqah (memisahkan diri) atau shalatnya ikut batal."
+      },
+      {
+        id: 15,
+        topic: "Makmum Masbuk",
+        statement: "Bagi makmum masbuk yang mendapati imam sudah dalam posisi rukuk, bacaan surat Al-Fatihahnya sudah ditanggung oleh imam jika ia sempat rukuk dan thuma'ninah bersama imam.",
+        correctAnswer: true,
+        explanation: "BENAR. Tanggungan bacaan Al-Fatihah makmum masbuk gugur dan ditanggung oleh imam jika makmum sempat rukuk bersama imam dengan sempurna."
+      },
+      {
+        id: 16,
+        topic: "Syarat Makmum",
+        statement: "Shalat berjamaah tetap sah meskipun gerakan jenis shalat makmum dan imam berbeda secara mencolok, misalnya shalat fardhu bermakmum pada shalat jenazah.",
+        correctAnswer: false,
+        explanation: "SALAH. Disyaratkan format/aturan susunan gerakan shalat antara imam dan makmum harus selaras (tidak sah bermakmum shalat fardhu kepada shalat gerhana atau shalat jenazah karena perbedaannya rukunnya besar)."
+      },
+      {
+        id: 17,
+        topic: "Makmum Muwafiq",
+        statement: "Makmum muwafiq yang sengaja tidak membaca Al-Fatihah saat berdiri karena menunggu imam rukuk, Al-Fatihahnya otomatis ditanggung imam.",
+        correctAnswer: false,
+        explanation: "SALAH. Makmum muwafiq wajib membaca Al-Fatihahnya sendiri karena memiliki waktu yang cukup. Menundanya dengan sengaja membuat rakaatnya tidak sah."
+      },
+      {
+        id: 18,
+        topic: "Syarat Makmum",
+        statement: "Ketika shalat berjamaah, makmum makruh mendahului imam satu rukun dan haram mendahului imam dua rukun fi'li berturut-turut tanpa uzur.",
+        correctAnswer: true,
+        explanation: "BENAR. Mendahului satu rukun hukumnya makruh dan menghilangkan fadhilah jamaah, sedangkan mendahului dua rukun fi'li membatalkan shalat."
+      },
+      {
+        id: 19,
+        topic: "Makmum Masbuk",
+        statement: "Seseorang yang datang saat imam sedang sujud langsung melakukan takbiratul ihram sambil berdiri, kemudian langsung turun mengikuti posisi sujud imam tanpa perlu menunggu imam berdiri.",
+        correctAnswer: true,
+        explanation: "BENAR. Makmum disunnahkan segera mengikuti posisi di mana imam berada saat itu setelah melakukan takbiratul ihram dalam keadaan berdiri."
+      },
+      {
+        id: 20,
+        topic: "Syarat Imam",
+        statement: "Niat menjadi imam (imaman) merupakan syarat sah shalat bagi imam dalam semua jenis shalat fardhu secara mutlak.",
+        correctAnswer: false,
+        explanation: "SALAH. Niat imam hanya menjadi syarat sah pada shalat Jumat. Pada shalat fardhu lainnya, jika imam tidak berniat imam, shalatnya tetap sah sebagai shalat munfarid (sendiri), meskipun kehilangan pahala berjamaah."
+      }
+    ];
+
+    // State 5 Soal yang Sedang Aktif
+    let activeQuestions = [];
+    const userAnswers = {};
+
+    // Inisialisasi Aplikasi Saat Halaman Selesai Dimuat
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Isi Dropdown Siswa
+      const selectElem = document.getElementById("student-select");
+      studentNames.forEach(name => {
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        selectElem.appendChild(opt);
+      });
+
+      // Clear input manual saat memilih dropdown dan sebaliknya
+      selectElem.addEventListener("change", () => {
+        if (selectElem.value) {
+          document.getElementById("custom-name").value = "";
+        }
+      });
+      document.getElementById("custom-name").addEventListener("input", (e) => {
+        if (e.target.value.trim() !== "") {
+          selectElem.value = "";
+        }
+      });
+
+      // 2. Acak dan Tampilkan 5 Soal dari Bank Soal
+      setupRandomQuestions();
+    });
+
+    // Fungsi Mengacak 5 Soal dari 20 Bank Soal
+    function setupRandomQuestions() {
+      // Fisher-Yates Shuffle
+      const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+      activeQuestions = shuffled.slice(0, 5);
+
+      // Bersihkan jawaban sebelumnya
+      for (const key in userAnswers) {
+        delete userAnswers[key];
+      }
+
+      const container = document.getElementById("questions-container");
+      container.innerHTML = "";
+
+      activeQuestions.forEach((q, index) => {
+        userAnswers[q.id] = null;
+        const qNum = index + 1;
+
+        const card = document.createElement("div");
+        card.className = "question-card p-5 rounded-2xl bg-white border border-slate-200 hover:border-emerald-300 transition-all shadow-sm";
+        card.id = `q-card-${q.id}`;
+        card.innerHTML = `
+          <div class="flex items-start gap-3">
+            <span class="flex-shrink-0 w-7 h-7 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold flex items-center justify-center">
+              ${qNum}
+            </span>
+            <div class="flex-1">
+              <div class="inline-block px-2.5 py-0.5 mb-2 text-[11px] font-semibold tracking-wide uppercase rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                ${q.topic}
+              </div>
+              <p class="text-sm md:text-base font-medium text-slate-800 leading-relaxed">
+                "${q.statement}"
+              </p>
+              
+              <!-- Pilihan Benar / Salah -->
+              <div class="grid grid-cols-2 gap-3 mt-4">
+                <button type="button" onclick="selectAnswer(${q.id}, true)" id="btn-${q.id}-true" class="answer-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-400 font-semibold text-sm text-slate-700 transition-all">
+                  <i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> BENAR
+                </button>
+                <button type="button" onclick="selectAnswer(${q.id}, false)" id="btn-${q.id}-false" class="answer-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-400 font-semibold text-sm text-slate-700 transition-all">
+                  <i data-lucide="x" class="w-4 h-4 text-rose-600"></i> SALAH
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      updateProgress();
+      lucide.createIcons();
+    }
+
+    // Fungsi Memilih Jawaban
+    function selectAnswer(questionId, value) {
+      userAnswers[questionId] = value;
+
+      const btnTrue = document.getElementById(`btn-${questionId}-true`);
+      const btnFalse = document.getElementById(`btn-${questionId}-false`);
+
+      if (value === true) {
+        btnTrue.className = "answer-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-emerald-600 bg-emerald-600 text-white font-bold text-sm shadow transition-all";
+        btnFalse.className = "answer-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-200 bg-white hover:bg-rose-50 hover:border-rose-300 font-semibold text-sm text-slate-700 transition-all";
+      } else {
+        btnFalse.className = "answer-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-rose-600 bg-rose-600 text-white font-bold text-sm shadow transition-all";
+        btnTrue.className = "answer-btn flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border-2 border-slate-200 bg-white hover:bg-emerald-50 hover:border-emerald-300 font-semibold text-sm text-slate-700 transition-all";
+      }
+
+      updateProgress();
+      lucide.createIcons();
+    }
+
+    // Perbarui Teks Progres Pengerjaan
+    function updateProgress() {
+      const answeredCount = Object.values(userAnswers).filter(val => val !== null).length;
+      document.getElementById("progress-text").textContent = `${answeredCount} dari 5 Soal Terjawab`;
+    }
+
+    // Submit & Hitung Skor
+    function submitQuiz() {
+      const errorBox = document.getElementById("error-box");
+      const errorMsg = document.getElementById("error-message");
+      
+      const selectVal = document.getElementById("student-select").value;
+      const customVal = document.getElementById("custom-name").value.trim();
+      const studentName = customVal || selectVal;
+
+      if (!studentName) {
+        errorBox.classList.remove("hidden");
+        errorMsg.textContent = "Silakan pilih nama siswa dari daftar atau ketikkan nama Anda terlebih dahulu.";
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+        return;
+      }
+
+      const unanswered = activeQuestions.filter(q => userAnswers[q.id] === null);
+      if (unanswered.length > 0) {
+        errorBox.classList.remove("hidden");
+        errorMsg.textContent = `Masih ada ${unanswered.length} soal yang belum dijawab. Mohon lengkapi seluruh 5 soal sebelum mengirim jawaban.`;
+        return;
+      }
+
+      errorBox.classList.add("hidden");
+
+      // Perhitungan Nilai (5 soal x 20 poin = 100)
+      let correctCount = 0;
+      const explanationContainer = document.getElementById("explanation-container");
+      explanationContainer.innerHTML = "";
+
+      activeQuestions.forEach((q, index) => {
+        const isUserCorrect = userAnswers[q.id] === q.correctAnswer;
+        if (isUserCorrect) correctCount++;
+
+        const userText = userAnswers[q.id] ? "BENAR" : "SALAH";
+        const keyText = q.correctAnswer ? "BENAR" : "SALAH";
+
+        const explCard = document.createElement("div");
+        explCard.className = `p-4 rounded-xl border ${isUserCorrect ? 'border-emerald-300 bg-emerald-50/60' : 'border-rose-300 bg-rose-50/60'} text-xs md:text-sm space-y-1.5`;
+        explCard.innerHTML = `
+          <div class="flex items-center justify-between font-bold">
+            <span class="text-slate-800">Soal #${index + 1} - ${q.topic}</span>
+            <span class="px-2 py-0.5 rounded text-[11px] font-bold ${isUserCorrect ? 'bg-emerald-600 text-white' : 'bg-rose-600 text-white'}">
+              ${isUserCorrect ? 'Tepat (+20 Poin)' : 'Kurang Tepat'}
+            </span>
+          </div>
+          <p class="text-slate-700 italic">"${q.statement}"</p>
+          <div class="pt-1 flex flex-wrap gap-4 text-xs font-semibold">
+            <span class="text-slate-600">Jawaban Kamu: <strong class="${isUserCorrect ? 'text-emerald-700' : 'text-rose-700'}">${userText}</strong></span>
+            <span class="text-slate-600">Kunci Jawaban: <strong class="text-emerald-800">${keyText}</strong></span>
+          </div>
+          <p class="text-slate-600 text-xs pt-1 border-t border-slate-200 mt-2 font-normal leading-relaxed">
+            <strong class="font-semibold text-slate-800">Catatan:</strong> ${q.explanation}
+          </p>
+        `;
+        explanationContainer.appendChild(explCard);
+      });
+
+      const finalScore = correctCount * 20;
+
+      // Update Tampilan Hasil
+      document.getElementById("result-student-name").textContent = studentName;
+      document.getElementById("final-score").textContent = finalScore;
+      document.getElementById("result-timestamp").textContent = "Diselesaikan pada: " + new Date().toLocaleDateString('id-ID', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+
+      const badgeIcon = document.getElementById("badge-icon");
+      const predicate = document.getElementById("score-predicate");
+
+      if (finalScore === 100) {
+        badgeIcon.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-3 shadow-md bg-emerald-500 text-white";
+        badgeIcon.innerHTML = `<i data-lucide="award" class="w-8 h-8"></i>`;
+        predicate.textContent = "Mumtaz! Luar biasa, seluruh 5 butir soal dijawab dengan benar!";
+        predicate.className = "text-sm font-bold text-emerald-700 mt-3";
+      } else if (finalScore >= 80) {
+        badgeIcon.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-3 shadow-md bg-teal-500 text-white";
+        badgeIcon.innerHTML = `<i data-lucide="check-check" class="w-8 h-8"></i>`;
+        predicate.textContent = "Jayyid Jiddan! Sangat bagus, pemahaman shalat berjamaah sudah mantap.";
+        predicate.className = "text-sm font-bold text-teal-700 mt-3";
+      } else if (finalScore >= 60) {
+        badgeIcon.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-3 shadow-md bg-amber-500 text-white";
+        badgeIcon.innerHTML = `<i data-lucide="thumbs-up" class="w-8 h-8"></i>`;
+        predicate.textContent = "Cukup Baik! Pelajari kembali ulasan pembahasan di bawah untuk menyempurnakan pemahaman.";
+        predicate.className = "text-sm font-bold text-amber-700 mt-3";
+      } else {
+        badgeIcon.className = "w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-3 shadow-md bg-rose-500 text-white";
+        badgeIcon.innerHTML = `<i data-lucide="refresh-cw" class="w-8 h-8"></i>`;
+        predicate.textContent = "Perlu Belajar Lagi! Jangan putus asa, cermati catatan penjelasan dan coba latihan lagi.";
+        predicate.className = "text-sm font-bold text-rose-700 mt-3";
+      }
+
+      // Tampilkan Panel Hasil
+      document.getElementById("quiz-wrapper").classList.add("hidden");
+      const resultWrapper = document.getElementById("result-wrapper");
+      resultWrapper.classList.remove("hidden");
+      
+      lucide.createIcons();
+      resultWrapper.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Reset Ulang Kuis & Acak 5 Soal Baru
+    function resetQuiz() {
+      setupRandomQuestions();
+      document.getElementById("result-wrapper").classList.add("hidden");
+      document.getElementById("quiz-wrapper").classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
